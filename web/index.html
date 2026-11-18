@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Shareload</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="titlebar pywebview-drag-region">
+            <div class="titlebar-left">
+                <span class="app-title">Shareload</span>
+                <span id="badge-sites" class="badge-glow">10 000+ сайтов</span>
+            </div>
+            <div class="window-controls">
+                <button id="btn-min" class="win-btn" title="Свернуть">&#xE921;</button>
+                <button id="btn-close" class="win-btn close" title="Закрыть">&#xE8BB;</button>
+            </div>
+        </header>
+
+        <div class="workspace">
+            <aside class="sidebar">
+                <button class="nav-btn active" data-tab="video" id="nav-video">Загрузить видео</button>
+                <button class="nav-btn" data-tab="playlist" id="nav-playlist">Загрузить плейлист</button>
+                <button class="nav-btn" data-tab="network" id="nav-network">Проверить сеть</button>
+                <button class="nav-btn" data-tab="settings" id="nav-settings">Настройки</button>
+            </aside>
+
+            <main class="main-panel">
+                <section id="tab-downloader" class="tab-view">
+                    <div class="greeting-header">
+                        <h1 id="greeting-title">Добрый вечер, Пользователь</h1>
+                        <p id="greeting-sub">Бесплатно загружайте видео и аудио по одной ссылке</p>
+                    </div>
+
+                    <div class="row-url">
+                        <input type="text" id="url-input" placeholder="https://www.youtube.com/watch?v=... / TikTok / Instagram">
+                        <button id="btn-analyze" class="btn-dark">Найти</button>
+                        <button id="btn-paste" class="btn-blue">Вставить</button>
+                    </div>
+
+                    <div class="row-settings">
+                        <select id="quality-select" class="select-dark">
+                            <option id="opt-best" value="best">Формат и качество: Лучшее (MP4)</option>
+                            <option id="opt-1080" value="1080">Full HD 1080p (MP4)</option>
+                            <option id="opt-720" value="720">HD 720p (MP4)</option>
+                            <option id="opt-audio" value="audio">Только аудио (MP3)</option>
+                        </select>
+                        <div id="folder-display" class="path-box">C:\Users\Admin\Downloads</div>
+                        <button id="btn-folder" class="btn-dark">Обзор</button>
+                    </div>
+
+                    <div class="media-preview">
+                        <div class="thumb-box">
+                            <img id="thumb-img" src="" class="hidden" alt="">
+                            <span id="thumb-placeholder">Thumbnail</span>
+                        </div>
+                        <div class="meta-boxes">
+                            <div id="video-title" class="meta-title">Название видео</div>
+                            <div id="video-desc" class="meta-desc">Описание</div>
+                        </div>
+                    </div>
+
+                    <div class="bottom-controls">
+                        <div id="progress-area" class="progress-area hidden">
+                            <div class="progress-info">
+                                <span id="status-text">Подготовка...</span>
+                                <span id="percent-text">0%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div id="progress-fill" class="progress-fill"></div>
+                            </div>
+                        </div>
+                        <div class="download-actions">
+                            <button id="btn-download" class="btn-blue-full">Скачать медиафайл</button>
+                            <button id="btn-open-folder" class="btn-dark hidden">Открыть папку</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tab-network" class="tab-view hidden">
+                    <div class="greeting-header">
+                        <h1 id="net-title">Проверка соединения</h1>
+                        <p id="net-sub">Диагностика доступа к серверам загрузки медиа</p>
+                    </div>
+                    <div class="net-list">
+                        <div class="net-item"><span>Интернет-соединение (DNS)</span><span id="net-internet" class="net-status">—</span></div>
+                        <div class="net-item"><span>YouTube</span><span id="net-youtube" class="net-status">—</span></div>
+                        <div class="net-item"><span>TikTok</span><span id="net-tiktok" class="net-status">—</span></div>
+                        <div class="net-item"><span>Instagram</span><span id="net-instagram" class="net-status">—</span></div>
+                    </div>
+                    <button id="btn-run-net" class="btn-blue-full" style="margin-top: auto;">Запустить проверку</button>
+                </section>
+
+                <section id="tab-settings" class="tab-view hidden">
+                    <div class="greeting-header">
+                        <h1 id="set-title">Настройки Shareload</h1>
+                        <p id="set-sub">Персонализация и параметры интерфейса</p>
+                    </div>
+                    <div class="settings-form">
+                        <div>
+                            <label id="lbl-username" class="field-label">Имя пользователя</label>
+                            <input type="text" id="input-username" placeholder="Введите имя">
+                        </div>
+
+                        <div class="settings-row-2col">
+                            <div>
+                                <label id="lbl-theme" class="field-label">Тема оформления</label>
+                                <div class="theme-toggle-group">
+                                    <button type="button" class="theme-btn active" data-theme="dark" id="btn-theme-dark">Тёмная</button>
+                                    <button type="button" class="theme-btn" data-theme="light" id="btn-theme-light">Светлая</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label id="lbl-accent" class="field-label">Акцентный цвет</label>
+                                <div class="accent-swatches">
+                                    <button type="button" class="swatch active" data-accent="blue" style="background: #1B6EC2;"></button>
+                                    <button type="button" class="swatch" data-accent="purple" style="background: #7C3AED;"></button>
+                                    <button type="button" class="swatch" data-accent="emerald" style="background: #10B981;"></button>
+                                    <button type="button" class="swatch" data-accent="rose" style="background: #E11D48;"></button>
+                                    <button type="button" class="swatch" data-accent="amber" style="background: #D97706;"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label id="lbl-lang" class="field-label">Язык интерфейса</label>
+                            <div class="lang-list">
+                                <div class="lang-option active" data-lang="ru">
+                                    <span>Русский</span>
+                                    <svg class="flag-icon" viewBox="0 0 24 16"><rect width="24" height="5.33" fill="#fff"/><rect y="5.33" width="24" height="5.33" fill="#0039A6"/><rect y="10.66" width="24" height="5.34" fill="#D52B1E"/></svg>
+                                </div>
+                                <div class="lang-option" data-lang="uk">
+                                    <span>Українська</span>
+                                    <svg class="flag-icon" viewBox="0 0 24 16"><rect width="24" height="8" fill="#0057B7"/><rect y="8" width="24" height="8" fill="#FFD700"/></svg>
+                                </div>
+                                <div class="lang-option" data-lang="en">
+                                    <span>English</span>
+                                    <svg class="flag-icon" viewBox="0 0 24 16"><rect width="24" height="16" fill="#012169"/><path d="M0,0 L24,16 M24,0 L0,16" stroke="#fff" stroke-width="2.5"/><path d="M12,0 V16 M0,8 H24" stroke="#fff" stroke-width="4"/><path d="M12,0 V16 M0,8 H24" stroke="#C8102E" stroke-width="2.4"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-footer">
+                        <button id="btn-save-settings" class="btn-blue-full">Сохранить настройки</button>
+                        <div id="copyright-text" class="copyright-notice">© 2026 Shareload. Все права защищены. Предназначено исключительно для личного использования и загрузки общедоступного контента.</div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
